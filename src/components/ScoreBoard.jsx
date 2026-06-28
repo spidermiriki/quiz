@@ -4,7 +4,7 @@ import { saveScore } from "../utils/leaderboard";
 const MAX_OPEN = 31 * 1000;
 const MAX_QCM  = 31 * 500;
 
-export default function ScoreBoard({ name, score, total, points, mode, onRestart, onLeaderboard }) {
+export default function ScoreBoard({ name, photo, score, total, points, mode, onRestart, onLeaderboard }) {
   const saved = useRef(false);
   const maxPoints = mode === "open" ? MAX_OPEN : MAX_QCM;
   const pct = Math.round((score / total) * 100);
@@ -12,7 +12,7 @@ export default function ScoreBoard({ name, score, total, points, mode, onRestart
   useEffect(() => {
     if (!saved.current) {
       saved.current = true;
-      saveScore({ name, score, total, points, mode });
+      saveScore({ name, photo, score, total, points, mode });
     }
   }, []);
 
