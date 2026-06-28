@@ -3,17 +3,48 @@ import { questions } from "./data/questions";
 import QuizCard from "./components/QuizCard";
 import ScoreBoard from "./components/ScoreBoard";
 import FlowerBg from "./components/FlowerBg";
+import NameInput from "./components/NameInput";
+import ModeSelector from "./components/ModeSelector";
+import Leaderboard from "./components/Leaderboard";
 import "./App.css";
 
-export default function App() {
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
-  function handleStart() {
+function buildDeck() {
+  return shuffle(questions).map((q) => ({
+    ...q,
+    options: shuffle(q.options),
+  }));
+}
+
+// phases: "name" | "mode" | "quiz" | "score" | "leaderboard"
+
+export default function App() {
+  const [phase, setPhase] = useState("name");
+  const [playerName, setPlayerName] = useState("");
+  const [mode, setMode] = useState(null);          // "qcm" | "open"
+  const [deck, setDeck] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
+
+  function handleName(name) {
+    setPlayerName(name);
+    setPhase("mode");
+  }
+
+  function handleMode(m) {
+    setMode(m);
+    setDeck(buildDeck());
     setCurrentIndex(0);
     setScore(0);
-    setFinished(false);
+    setPhase("quiz");
   }
 
   function handleNext(wasCorrect) {
@@ -23,14 +54,14 @@ export default function App() {
 
   function handleFinish(wasCorrect) {
     setScore(wasCorrect ? score + 1 : score);
-    setFinished(true);
-    setCurrentIndex(null);
+    setPhase("score");
   }
 
   function handleRestart() {
-    setCurrentIndex(null);
+    setPhase("mode");
+    setCurrentIndex(0);
     setScore(0);
-    setFinished(false);
+    setMode(null);
   }
 
   return (
@@ -38,42 +69,45 @@ export default function App() {
       <FlowerBg />
       <div className="app-wrapper">
         <div className="app-container">
-          {/* Accueil */}
-          {currentIndex === null && !finished && (
-            <div className="card" style={{ textAlign: "center", padding: "40px 24px" }}>
-              <p style={{ fontSize: "2rem", marginBottom: "6px", color: "#c084fc", fontWeight: 900, letterSpacing: "-0.5px" }}>
-                *
-              </p>
-              <h1
-                className="gradient-text"
-                style={{ fontSize: "1.9rem", fontWeight: 900, marginBottom: "10px" }}
-              >
-                Tu me connais ?
-              </h1>
-              <p className="home-subtitle">
-                {questions.length} questions — A quel point mde connais tu Solane ? ?
-              </p>
-              <button className="btn-primary" onClick={handleStart}>
-                C&apos;est parti !
-              </button>
-            </div>
+
+          {phase === "name" && (
+            <NameInput
+              onStart={handleName}
+              onLeaderboard={() => setPhase("leaderboard")}
+            />
           )}
 
-          {/* Quiz en cours */}
-          {currentIndex !== null && !finished && (
+          {phase === "mode" && (
+            <ModeSelector name={playerName} onSelect={handleMode} />
+          )}
+
+          {phase === "quiz" && (
             <QuizCard
+              key={currentIndex}
               question={questions[currentIndex]}
               index={currentIndex}
               total={questions.length}
+              mode={mode}
               onNext={handleNext}
               onFinish={handleFinish}
             />
           )}
 
-          {/* Score final */}
-          {finished && (
-            <ScoreBoard score={score} total={questions.length} onRestart={handleRestart} />
+          {phase === "score" && (
+            <ScoreBoard
+              name={playerName}
+              score={score}
+              total={questions.length}
+              mode={mode}
+              onRestart={handleRestart}
+              onLeaderboard={() => setPhase("leaderboard")}
+            />
           )}
+
+          {phase === "leaderboard" && (
+            <Leaderboard onBack={() => setPhase(playerName ? "name" : "name")} />
+          )}
+
         </div>
       </div>
     </>
