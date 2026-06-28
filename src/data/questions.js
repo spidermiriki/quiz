@@ -227,6 +227,15 @@ export const questions = [
     difficulty: "difficile",
   },
 
+  {
+    id: 30,
+    question: "Quel est mon animal préféré ?",
+    options: ["Tigre", "Dragon de Komodo", "Loup", "Caméléon"],
+    answer: "Dragon de Komodo",
+    openAnswers: ["dragon de komodo", "komodo", "dragon komodo", "varan de komodo"],
+    difficulty: "difficile",
+  },
+
   // ─── IMPOSSIBLE ──────────────────────────────────────────
   {
     id: 27,
@@ -243,6 +252,14 @@ export const questions = [
     answer: "Devil May Cry",
     openAnswers: ["devil may cry", "dmc"],
     difficulty: "impossible",
+  },
+  {
+    id: 31,
+    question: "Quelle est ma série préférée ?",
+    options: ["Breaking Bad", "Game of Thrones", "Peaky Blinders", "The Last of Us"],
+    answer: "Game of Thrones",
+    openAnswers: ["game of thrones", "got", "game of throne"],
+    difficulty: "moyen",
   },
   {
     id: 29,

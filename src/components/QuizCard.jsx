@@ -20,7 +20,7 @@ export default function QuizCard({ question, index, total, mode, onNext, onFinis
 
   const isLast = index === total - 1;
   const qcmAnswered = selected !== null || qcmTimedOut;
-  const qcmCorrect = selected === question.answer;
+  const qcmCorrect = selected?.option === question.answer;
 
   // QCM countdown
   useEffect(() => {

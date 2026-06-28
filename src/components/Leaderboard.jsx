@@ -8,10 +8,10 @@ export default function Leaderboard({ onBack }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getScores().then((s) => {
-      setScores(s);
-      setLoading(false);
-    });
+    getScores()
+      .then((s) => setScores(s))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   async function handleClear() {
