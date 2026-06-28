@@ -1,5 +1,16 @@
-export default function ScoreBoard({ score, total, onRestart }) {
+import { useEffect, useRef } from "react";
+import { saveScore } from "../utils/leaderboard";
+
+export default function ScoreBoard({ name, score, total, mode, onRestart, onLeaderboard }) {
+  const saved = useRef(false);
   const pct = Math.round((score / total) * 100);
+
+  useEffect(() => {
+    if (!saved.current) {
+      saveScore({ name, score, total, mode });
+      saved.current = true;
+    }
+  }, []);
 
   function getMessage() {
     if (pct === 100) return { text: "Tu me connais parfaitement !", color: "#166534" };
@@ -12,14 +23,11 @@ export default function ScoreBoard({ score, total, onRestart }) {
 
   return (
     <div className="card" style={{ textAlign: "center", padding: "36px 24px" }}>
-      <p style={{ color: "#c4b5fd", fontSize: "0.85rem", marginBottom: "10px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
-        Score final
+      <p style={{ color: "#c4b5fd", fontSize: "0.82rem", fontWeight: 600, marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+        Score de {name}
       </p>
 
-      <p
-        className="gradient-text"
-        style={{ fontSize: "4.5rem", fontWeight: 900, lineHeight: 1, margin: "0 0 10px" }}
-      >
+      <p className="gradient-text" style={{ fontSize: "4.5rem", fontWeight: 900, lineHeight: 1, margin: "0 0 10px" }}>
         {pct}%
       </p>
 
@@ -32,29 +40,24 @@ export default function ScoreBoard({ score, total, onRestart }) {
       </p>
 
       {/* Barre de score */}
-      <div
-        style={{
-          height: "10px",
-          backgroundColor: "#f3e8ff",
+      <div style={{ height: "10px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "24px", overflow: "hidden" }}>
+        <div style={{
+          height: "100%",
+          width: `${pct}%`,
+          background: "linear-gradient(90deg, #9333ea, #c084fc)",
           borderRadius: "999px",
-          marginBottom: "28px",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            height: "100%",
-            width: `${pct}%`,
-            background: "linear-gradient(90deg, #9333ea, #c084fc)",
-            borderRadius: "999px",
-            transition: "width 0.9s ease",
-          }}
-        />
+          transition: "width 0.9s ease",
+        }} />
       </div>
 
-      <button className="btn-primary" onClick={onRestart}>
-        Recommencer
-      </button>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <button className="btn-primary" onClick={onRestart}>
+          Recommencer
+        </button>
+        <button className="btn-ghost" onClick={onLeaderboard}>
+          Voir le classement
+        </button>
+      </div>
     </div>
   );
 }

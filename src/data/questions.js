@@ -5,6 +5,7 @@ export const questions = [
     question: "Quel est mon nom de famille ?",
     options: ["Garcia Rodriguez", "Martinez Perez", "Derouck Arredondo", "Lopez Sanchez"],
     answer: "Derouck Arredondo",
+    openAnswers: ["derouck arredondo", "derouck", "arredondo"],
     difficulty: "facile",
   },
   {
@@ -12,6 +13,7 @@ export const questions = [
     question: "Homero est-il mon premier ou mon 2e prénom ?",
     options: ["Premier prénom", "2e prénom"],
     answer: "2e prénom",
+    openAnswers: ["2e", "2eme", "deuxieme", "2", "second", "2e prenom"],
     difficulty: "facile",
   },
   {
@@ -19,6 +21,7 @@ export const questions = [
     question: "Dans quel pays suis-je né ?",
     options: ["Colombie", "Mexique", "Espagne", "France"],
     answer: "Mexique",
+    openAnswers: ["mexique", "mexico"],
     difficulty: "facile",
   },
   {
@@ -26,6 +29,7 @@ export const questions = [
     question: "Quelle est ma couleur préférée ?",
     options: ["Bleu", "Noir", "Rouge", "Vert"],
     answer: "Vert",
+    openAnswers: ["vert", "green"],
     difficulty: "facile",
   },
   {
@@ -33,6 +37,7 @@ export const questions = [
     question: "Comment s'appellent mes chats ?",
     options: ["Max et Milo", "Gary et Tchoupi", "Simba et Nala", "Luna et Felix"],
     answer: "Gary et Tchoupi",
+    openAnswers: ["gary et tchoupi", "tchoupi et gary", "gary tchoupi", "tchoupi gary"],
     difficulty: "facile",
   },
   {
@@ -40,6 +45,7 @@ export const questions = [
     question: "Quelle est ma marque de vêtements préférée ?",
     options: ["Supreme", "Nike", "Carhartt", "Vicinity"],
     answer: "Vicinity",
+    openAnswers: ["vicinity"],
     difficulty: "facile",
   },
   {
@@ -47,6 +53,7 @@ export const questions = [
     question: "Combien est-ce que j'ai de frère ?",
     options: ["0", "2", "1", "3"],
     answer: "1",
+    openAnswers: ["1", "un", "one"],
     difficulty: "facile",
   },
   {
@@ -54,6 +61,7 @@ export const questions = [
     question: "Damian et moi sommes-nous faux ou vrais jumeaux ?",
     options: ["Vrais jumeaux", "Faux jumeaux"],
     answer: "Faux jumeaux",
+    openAnswers: ["faux jumeaux", "faux", "dizygotes"],
     difficulty: "facile",
   },
   {
@@ -61,6 +69,7 @@ export const questions = [
     question: "Suis-je le grand ou le petit frère ?",
     options: ["Petit frère", "Grand frère"],
     answer: "Grand frère",
+    openAnswers: ["grand frere", "grand", "l aine", "aine", "le grand"],
     difficulty: "facile",
   },
   {
@@ -68,6 +77,7 @@ export const questions = [
     question: "Quelles sont mes études ?",
     options: ["Marketing", "Design graphique", "Droit", "Informatique"],
     answer: "Informatique",
+    openAnswers: ["informatique", "info", "it", "dev", "developpement"],
     difficulty: "facile",
   },
   {
@@ -75,6 +85,7 @@ export const questions = [
     question: "J'ai combien d'exs ?",
     options: ["1", "4", "3", "2"],
     answer: "3",
+    openAnswers: ["3", "trois", "three"],
     difficulty: "facile",
   },
   {
@@ -82,6 +93,7 @@ export const questions = [
     question: "Suis-je goofy ou regular ?",
     options: ["Regular", "Goofy"],
     answer: "Goofy",
+    openAnswers: ["goofy"],
     difficulty: "facile",
   },
 
@@ -89,8 +101,9 @@ export const questions = [
   {
     id: 13,
     question: "Quel est mon jeu vidéo préféré ?",
-    options: ["Minecraft", "Pokémon", "Call of Duty", "FIFA"],
-    answer: "Pokémon",
+    options: ["Minecraft", "Pokémon", "Hollow Knight", "Brawlstars"],
+    answer: "Hollow Knight",
+    openAnswers: ["hollow knight", "hollow"],
     difficulty: "moyen",
   },
   {
@@ -98,27 +111,31 @@ export const questions = [
     question: "Quel opus Pokémon est mon préféré ?",
     options: ["Pokémon Émeraude", "Pokémon Diamant", "Pokémon Noir", "Pokémon SoulSilver"],
     answer: "Pokémon SoulSilver",
-    difficulty: "difficile",
+    openAnswers: ["soulsilver", "soul silver", "pokemon soulsilver", "heartgold soulsilver", "or argent"],
+    difficulty: "impossible",
   },
   {
     id: 15,
     question: "Quelle est ma taille de board ?",
     options: ["7.75", "8.0", "8.25", "8.5"],
     answer: "8.25",
+    openAnswers: ["8.25", "8,25"],
     difficulty: "moyen",
   },
   {
     id: 16,
     question: "Qui est mon super héros préféré ?",
-    options: ["Spiderman", "Batman", "Ben Ten", "Goku"],
+    options: ["Spiderman", "Batman", "Ben Ten", "Invincible"],
     answer: "Ben Ten",
+    openAnswers: ["ben ten", "ben 10", "ben10"],
     difficulty: "moyen",
   },
   {
     id: 17,
     question: "Quel est l'article que j'ai le plus acheté à mon travail ?",
-    options: ["Sneakers", "Vêtements", "Jeux vidéo", "Cartes Pokémon"],
+    options: ["Barbies", "Legos", "Jeux vidéo", "Cartes Pokémon"],
     answer: "Cartes Pokémon",
+    openAnswers: ["cartes pokemon", "pokemon", "cartes", "cartes de pokemon"],
     difficulty: "moyen",
   },
   {
@@ -126,13 +143,15 @@ export const questions = [
     question: "Qui est mon Spiderman préféré ?",
     options: ["Peter Parker", "Miguel O'Hara", "Gwen Stacy", "Miles Morales"],
     answer: "Miles Morales",
+    openAnswers: ["miles morales", "miles"],
     difficulty: "moyen",
   },
   {
     id: 19,
     question: "Comment s'appelle ma maman ?",
-    options: ["Maria", "Claudia", "Carmen", "Sofia"],
+    options: ["Maria", "Claudia", "Carmen", "Solane"],
     answer: "Claudia",
+    openAnswers: ["claudia"],
     difficulty: "moyen",
   },
 
@@ -142,6 +161,7 @@ export const questions = [
     question: "Combien de tatouages est-ce que j'ai ?",
     options: ["8", "6", "10", "7"],
     answer: "7",
+    openAnswers: ["7", "sept"],
     difficulty: "difficile",
   },
   {
@@ -154,6 +174,16 @@ export const questions = [
       "Anglais, Français, Espagnol",
     ],
     answer: "Anglais, Français, Espagnol",
+    openAnswers: [
+      "anglais francais espagnol",
+      "francais anglais espagnol",
+      "espagnol anglais francais",
+      "anglais espagnol francais",
+      "francais espagnol anglais",
+      "espagnol francais anglais",
+      "3 langues",
+      "trois langues",
+    ],
     difficulty: "difficile",
   },
   {
@@ -161,13 +191,15 @@ export const questions = [
     question: "Depuis combien d'années est-ce que je connais Nathan ?",
     options: ["10 ans", "20 ans", "12 ans", "16 ans"],
     answer: "16 ans",
+    openAnswers: ["16 ans", "16", "seize ans", "seize"],
     difficulty: "difficile",
   },
   {
     id: 23,
     question: "Quel est mon film préféré ?",
-    options: ["Fight Club", "Interstellar", "American History X", "The Dark Knight"],
+    options: ["Je suis une Legende", "Requiem for a dream", "American History X", "Forest Gump"],
     answer: "American History X",
+    openAnswers: ["american history x", "american history"],
     difficulty: "difficile",
   },
   {
@@ -175,6 +207,7 @@ export const questions = [
     question: "Quelle est ma série d'animation préférée ?",
     options: ["Attack on Titan", "Death Note", "Devilman Crybaby", "Fullmetal Alchemist"],
     answer: "Devilman Crybaby",
+    openAnswers: ["devilman crybaby", "devilman"],
     difficulty: "difficile",
   },
   {
@@ -182,6 +215,7 @@ export const questions = [
     question: "Quel est mon Pokémon préféré ?",
     options: ["Pikachu", "Dracaufeu", "Keldeo", "Lucario"],
     answer: "Keldeo",
+    openAnswers: ["keldeo"],
     difficulty: "difficile",
   },
   {
@@ -189,6 +223,7 @@ export const questions = [
     question: "Comment s'appelle mon île natale ?",
     options: ["Cancun", "Tulum", "Puerto Vallarta", "Cozumel"],
     answer: "Cozumel",
+    openAnswers: ["cozumel"],
     difficulty: "difficile",
   },
 
@@ -198,13 +233,15 @@ export const questions = [
     question: "Quelle est ma taille de chaussures ?",
     options: ["42", "43", "44", "42.5"],
     answer: "42.5",
+    openAnswers: ["42.5", "42,5", "quarante deux et demi", "42 5"],
     difficulty: "impossible",
   },
   {
     id: 28,
     question: "Quel animé j'aime car il me fait penser à mon frère et moi ?",
-    options: ["Naruto", "Dragon Ball Z", "Devil May Cry", "Blue Lock"],
+    options: ["Snk", "Dragon Ball Z", "Devil May Cry", "Blue Lock"],
     answer: "Devil May Cry",
+    openAnswers: ["devil may cry", "dmc"],
     difficulty: "impossible",
   },
   {
@@ -212,6 +249,7 @@ export const questions = [
     question: "Combien de films ai-je vus sur Letterboxd ?",
     options: ["Plus de 500", "Plus de 800", "Plus de 2000", "Plus de 1300"],
     answer: "Plus de 1300",
+    openAnswers: ["1300", "plus de 1300", "1300 films", "plus 1300"],
     difficulty: "impossible",
   },
 ];

@@ -2,53 +2,54 @@ import { useState } from "react";
 import DifficultyBadge from "./DifficultyBadge";
 import AnswerOptions from "./AnswerOptions";
 import ResultMessage from "./ResultMessage";
+import OpenAnswer from "./OpenAnswer";
 
-export default function QuizCard({ question, index, total, onNext, onFinish }) {
-  const [selected, setSelected] = useState(null);
-  const isCorrect = selected === question.answer;
-  const answered = selected !== null;
+export default function QuizCard({ question, index, total, mode, onNext, onFinish }) {
+  const [selected, setSelected] = useState(null);   // QCM only
+  const [openDone, setOpenDone] = useState(null);   // "correct" | "timeout"
   const isLast = index === total - 1;
 
-  function handleSelect(option) {
+  // ── QCM ──
+  const qcmAnswered = selected !== null;
+  const qcmCorrect = selected === question.answer;
+
+  function handleQcmSelect(option) {
     setSelected(option);
   }
 
-  function handleNext() {
+  function handleNext(wasCorrect) {
     setSelected(null);
-    if (isLast) {
-      onFinish(isCorrect);
-    } else {
-      onNext(isCorrect);
-    }
+    setOpenDone(null);
+    if (isLast) onFinish(wasCorrect);
+    else onNext(wasCorrect);
+  }
+
+  // ── Open ──
+  function handleOpenCorrect() {
+    setOpenDone("correct");
+    if (isLast) onFinish(true);
+    else onNext(true);
+  }
+
+  function handleOpenTimeout() {
+    setOpenDone("timeout");
+    // auto-advance after brief pause (already done inside OpenAnswer)
+    if (isLast) onFinish(false);
+    else onNext(false);
   }
 
   return (
     <div className="card">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "16px",
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
         <span style={{ color: "#c4b5fd", fontSize: "0.82rem", fontWeight: 600 }}>
           {index + 1} / {total}
         </span>
         <DifficultyBadge difficulty={question.difficulty} />
       </div>
 
-      {/* Barre de progression */}
-      <div
-        style={{
-          height: "5px",
-          backgroundColor: "#f3e8ff",
-          borderRadius: "999px",
-          marginBottom: "22px",
-          overflow: "hidden",
-        }}
-      >
+      {/* Progress bar (questions) */}
+      <div style={{ height: "5px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "22px", overflow: "hidden" }}>
         <div
           style={{
             height: "100%",
@@ -61,38 +62,39 @@ export default function QuizCard({ question, index, total, onNext, onFinish }) {
       </div>
 
       {/* Question */}
-      <p
-        style={{
-          color: "#3b0764",
-          fontSize: "1.05rem",
-          fontWeight: 700,
-          lineHeight: 1.55,
-          margin: 0,
-        }}
-      >
+      <p style={{ color: "#3b0764", fontSize: "1.05rem", fontWeight: 700, lineHeight: 1.55, margin: 0 }}>
         {question.question}
       </p>
 
-      {/* Reponses */}
-      <AnswerOptions
-        options={question.options}
-        selected={selected}
-        answer={question.answer}
-        onSelect={handleSelect}
-      />
-
-      {/* Resultat + bouton suivant */}
-      {answered && (
+      {/* ── Mode QCM ── */}
+      {mode === "qcm" && (
         <>
-          <ResultMessage isCorrect={isCorrect} />
-          <button
-            onClick={handleNext}
-            className="btn-primary"
-            style={{ marginTop: "4px" }}
-          >
-            {isLast ? "Voir mon score" : "Question suivante"}
-          </button>
+          <AnswerOptions
+            options={question.options}
+            selected={selected}
+            answer={question.answer}
+            onSelect={handleQcmSelect}
+          />
+          {qcmAnswered && (
+            <>
+              <ResultMessage isCorrect={qcmCorrect} />
+              <button onClick={() => handleNext(qcmCorrect)} className="btn-primary" style={{ marginTop: "4px" }}>
+                {isLast ? "Voir mon score" : "Question suivante"}
+              </button>
+            </>
+          )}
         </>
+      )}
+
+      {/* ── Mode Ouvert ── */}
+      {mode === "open" && (
+        <div style={{ marginTop: "20px" }}>
+          <OpenAnswer
+            question={question}
+            onCorrect={handleOpenCorrect}
+            onTimeout={handleOpenTimeout}
+          />
+        </div>
       )}
     </div>
   );
