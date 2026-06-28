@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { saveScore } from "../utils/leaderboard";
 
-const MAX_OPEN = 29 * 1000;
-const MAX_QCM  = 29 * 500;
+const MAX_OPEN = 31 * 1000;
+const MAX_QCM  = 31 * 500;
 
 export default function ScoreBoard({ name, score, total, points, mode, onRestart, onLeaderboard }) {
   const saved = useRef(false);
