@@ -1,4 +1,4 @@
-import { getScores, clearScores } from "../utils/leaderboard";
+import { getScores } from "../utils/leaderboard";
 import { useState, useEffect } from "react";
 
 const MEDAL_COLORS = ["#f59e0b", "#94a3b8", "#b45309"];
@@ -13,13 +13,6 @@ export default function Leaderboard({ onBack }) {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
-
-  async function handleClear() {
-    if (window.confirm("Effacer tout le classement ?")) {
-      await clearScores();
-      setScores([]);
-    }
-  }
 
   return (
     <div className="card" style={{ padding: "28px 20px" }}>
@@ -44,26 +37,15 @@ export default function Leaderboard({ onBack }) {
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {scores.map((s, i) => (
             <div key={s.id} className="lb-row">
-              <span
-                className="lb-rank"
-                style={{ color: i < 3 ? MEDAL_COLORS[i] : "#c4b5fd" }}
-              >
-                {`#${i + 1}`}
+              <span className="lb-rank" style={{ color: i < 3 ? MEDAL_COLORS[i] : "#c4b5fd" }}>
+                #{i + 1}
               </span>
               <span className="lb-name">{s.name}</span>
-              <span className="lb-mode">{s.mode === "qcm" ? "QCM" : "Ouvert"}</span>
+              <span className="lb-mode">{s.mode === "qcm" ? "Q" : "O"}</span>
               <span className="lb-score">{(s.points ?? 0).toLocaleString("fr-FR")} pts</span>
-              <span className="lb-detail">{s.score}/{s.total}</span>
-              <span className="lb-date">{s.date}</span>
             </div>
           ))}
         </div>
-      )}
-
-      {scores.length > 0 && (
-        <button onClick={handleClear} className="btn-ghost btn-ghost--danger" style={{ marginTop: "20px", width: "100%" }}>
-          Effacer le classement
-        </button>
       )}
     </div>
   );
