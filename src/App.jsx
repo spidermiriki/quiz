@@ -29,14 +29,16 @@ function buildDeck() {
 export default function App() {
   const [phase, setPhase] = useState("name");
   const [playerName, setPlayerName] = useState("");
+  const [playerPhoto, setPlayerPhoto] = useState(null);
   const [mode, setMode] = useState(null);          // "qcm" | "open"
   const [deck, setDeck] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);       // nb de bonnes réponses
   const [points, setPoints] = useState(0);     // total points
 
-  function handleName(name) {
+  function handleName({ name, photo }) {
     setPlayerName(name);
+    setPlayerPhoto(photo ?? null);
     setPhase("mode");
   }
 
@@ -102,6 +104,7 @@ export default function App() {
           {phase === "score" && (
             <ScoreBoard
               name={playerName}
+              photo={playerPhoto}
               score={score}
               total={deck.length}
               points={points}

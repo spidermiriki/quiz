@@ -13,9 +13,10 @@ import {
 const COL = "scores";
 const MAX_ENTRIES = 50;
 
-export async function saveScore({ name, score, total, points, mode }) {
+export async function saveScore({ name, photo, score, total, points, mode }) {
   await addDoc(collection(db, COL), {
     name,
+    ...(photo ? { photo } : {}),
     score,
     total,
     points,

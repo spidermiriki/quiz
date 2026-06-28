@@ -3,6 +3,28 @@ import { useState, useEffect } from "react";
 
 const MEDAL_COLORS = ["#f59e0b", "#94a3b8", "#b45309"];
 
+function Avatar({ photo, name }) {
+  if (photo) {
+    return (
+      <img
+        src={photo}
+        alt={name}
+        style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+      />
+    );
+  }
+  return (
+    <div style={{
+      width: 32, height: 32, borderRadius: "50%", flexShrink: 0,
+      background: "linear-gradient(135deg, #e9d5ff, #c084fc)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      fontWeight: 800, fontSize: "0.85rem", color: "#7e22ce",
+    }}>
+      {name[0].toUpperCase()}
+    </div>
+  );
+}
+
 export default function Leaderboard({ onBack }) {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,6 +62,7 @@ export default function Leaderboard({ onBack }) {
               <span className="lb-rank" style={{ color: i < 3 ? MEDAL_COLORS[i] : "#c4b5fd" }}>
                 #{i + 1}
               </span>
+              <Avatar photo={s.photo} name={s.name} />
               <span className="lb-name">{s.name}</span>
               <span className="lb-mode">{s.mode === "qcm" ? "Q" : "O"}</span>
               <span className="lb-score">{(s.points ?? 0).toLocaleString("fr-FR")} pts</span>
