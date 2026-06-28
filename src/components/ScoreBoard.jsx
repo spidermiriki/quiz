@@ -1,22 +1,26 @@
 import { useEffect, useRef } from "react";
 import { saveScore } from "../utils/leaderboard";
 
-export default function ScoreBoard({ name, score, total, mode, onRestart, onLeaderboard }) {
+const MAX_OPEN = 29 * 1000;
+const MAX_QCM  = 29 * 500;
+
+export default function ScoreBoard({ name, score, total, points, mode, onRestart, onLeaderboard }) {
   const saved = useRef(false);
+  const maxPoints = mode === "open" ? MAX_OPEN : MAX_QCM;
   const pct = Math.round((score / total) * 100);
 
   useEffect(() => {
     if (!saved.current) {
-      saveScore({ name, score, total, mode });
+      saveScore({ name, score, total, points, mode });
       saved.current = true;
     }
   }, []);
 
   function getMessage() {
     if (pct === 100) return { text: "Tu me connais parfaitement !", color: "#166534" };
-    if (pct >= 70)  return { text: "Tu me connais bien !", color: "#7e22ce" };
-    if (pct >= 40)  return { text: "Encore quelques efforts...", color: "#854d0e" };
-    return           { text: "On va rattraper ca ensemble !", color: "#991b1b" };
+    if (pct >= 70)   return { text: "Tu me connais bien !", color: "#7e22ce" };
+    if (pct >= 40)   return { text: "Encore quelques efforts...", color: "#854d0e" };
+    return            { text: "On va rattraper ca ensemble !", color: "#991b1b" };
   }
 
   const msg = getMessage();
@@ -27,23 +31,27 @@ export default function ScoreBoard({ name, score, total, mode, onRestart, onLead
         Score de {name}
       </p>
 
-      <p className="gradient-text" style={{ fontSize: "4.5rem", fontWeight: 900, lineHeight: 1, margin: "0 0 10px" }}>
-        {pct}%
+      {/* Points */}
+      <p className="gradient-text" style={{ fontSize: "3.8rem", fontWeight: 900, lineHeight: 1, margin: "0 0 4px" }}>
+        {points.toLocaleString("fr-FR")}
+      </p>
+      <p style={{ color: "#c4b5fd", fontSize: "0.8rem", marginBottom: "6px" }}>
+        pts sur {maxPoints.toLocaleString("fr-FR")} max
       </p>
 
-      <p style={{ color: "#9333ea", fontSize: "0.95rem", marginBottom: "6px", opacity: 0.7 }}>
-        {score} bonne{score > 1 ? "s" : ""} reponse{score > 1 ? "s" : ""} sur {total}
+      <p style={{ color: "#9333ea", fontSize: "0.9rem", marginBottom: "6px", opacity: 0.7 }}>
+        {score} bonne{score > 1 ? "s" : ""} reponse{score > 1 ? "s" : ""} sur {total} — {pct}%
       </p>
 
-      <p style={{ color: msg.color, fontSize: "1.15rem", fontWeight: 700, marginBottom: "28px" }}>
+      <p style={{ color: msg.color, fontSize: "1.1rem", fontWeight: 700, marginBottom: "24px" }}>
         {msg.text}
       </p>
 
-      {/* Barre de score */}
+      {/* Barre de points */}
       <div style={{ height: "10px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "24px", overflow: "hidden" }}>
         <div style={{
           height: "100%",
-          width: `${pct}%`,
+          width: `${Math.min(100, (points / maxPoints) * 100)}%`,
           background: "linear-gradient(90deg, #9333ea, #c084fc)",
           borderRadius: "999px",
           transition: "width 0.9s ease",

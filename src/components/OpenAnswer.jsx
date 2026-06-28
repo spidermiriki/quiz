@@ -3,12 +3,17 @@ import { isAnswerValid } from "../utils/normalize";
 
 const TIMER = 30;
 
+// Points: max 1000, min 50 si répondu correctement
+function calcPoints(timeLeft) {
+  return Math.round(50 + 950 * (timeLeft / TIMER));
+}
+
 export default function OpenAnswer({ question, onCorrect, onTimeout }) {
   const [input, setInput] = useState("");
   const [timeLeft, setTimeLeft] = useState(TIMER);
   const [status, setStatus] = useState("idle"); // idle | wrong | correct | timeout
   const [shake, setShake] = useState(false);
-  const [wrongCount, setWrongCount] = useState(0);
+  const [attempts, setAttempts] = useState([]); // historique des mauvaises tentatives
   const inputRef = useRef(null);
   const timerRef = useRef(null);
 
@@ -24,10 +29,7 @@ export default function OpenAnswer({ question, onCorrect, onTimeout }) {
     return () => clearTimeout(timerRef.current);
   }, [timeLeft, status]);
 
-  // Focus input on mount
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -38,9 +40,9 @@ export default function OpenAnswer({ question, onCorrect, onTimeout }) {
     if (isAnswerValid(trimmed, question.openAnswers)) {
       clearTimeout(timerRef.current);
       setStatus("correct");
-      setTimeout(() => onCorrect(), 900);
+      setTimeout(() => onCorrect(calcPoints(timeLeft)), 900);
     } else {
-      setWrongCount((c) => c + 1);
+      setAttempts((prev) => [...prev, trimmed]);
       setStatus("wrong");
       setShake(true);
       setInput("");
@@ -58,38 +60,37 @@ export default function OpenAnswer({ question, onCorrect, onTimeout }) {
   return (
     <div>
       {/* Timer bar */}
-      <div style={{ height: "5px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "20px", overflow: "hidden" }}>
-        <div
-          style={{
-            height: "100%",
-            width: `${pct}%`,
-            backgroundColor: timerColor,
-            borderRadius: "999px",
-            transition: "width 1s linear, background-color 0.5s ease",
-          }}
-        />
+      <div style={{ height: "5px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "8px", overflow: "hidden" }}>
+        <div style={{
+          height: "100%",
+          width: `${pct}%`,
+          backgroundColor: timerColor,
+          borderRadius: "999px",
+          transition: "width 1s linear, background-color 0.5s ease",
+        }} />
       </div>
 
-      {/* Timer count */}
-      <div style={{ textAlign: "right", marginBottom: "18px" }}>
-        <span style={{
-          fontSize: "0.8rem",
-          fontWeight: 700,
-          color: timerColor,
-          transition: "color 0.5s ease",
-        }}>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "14px" }}>
+        <span style={{ fontSize: "0.8rem", fontWeight: 700, color: timerColor, transition: "color 0.5s ease" }}>
           {timeLeft}s
         </span>
       </div>
 
-      {/* Wrong attempts */}
-      {wrongCount > 0 && status !== "correct" && status !== "timeout" && (
-        <p style={{ color: "#f87171", fontSize: "0.8rem", textAlign: "center", marginBottom: "10px" }}>
-          {wrongCount} tentative{wrongCount > 1 ? "s" : ""} incorrecte{wrongCount > 1 ? "s" : ""}
-        </p>
+      {/* Historique des tentatives */}
+      {attempts.length > 0 && status !== "correct" && status !== "timeout" && (
+        <div style={{ marginBottom: "12px" }}>
+          <p style={{ fontSize: "0.72rem", color: "#c4b5fd", marginBottom: "6px", fontWeight: 600 }}>
+            Tes tentatives :
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            {attempts.map((a, i) => (
+              <span key={i} className="attempt-chip">{a}</span>
+            ))}
+          </div>
+        </div>
       )}
 
-      {/* Input form */}
+      {/* Input */}
       {status !== "correct" && status !== "timeout" && (
         <form onSubmit={handleSubmit} style={{ display: "flex", gap: "8px" }}>
           <input

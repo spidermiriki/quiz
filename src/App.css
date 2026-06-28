@@ -220,10 +220,24 @@
   color: #991b1b;
 }
 
+/* ===== ATTEMPTS CHIPS ===== */
+.attempt-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #fff1f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: line-through;
+  text-decoration-color: #f87171;
+}
+
 /* ===== LEADERBOARD ===== */
 .lb-row {
   display: grid;
-  grid-template-columns: 28px 1fr 50px 44px 44px 60px;
+  grid-template-columns: 28px 1fr 50px 80px 40px 60px;
   align-items: center;
   gap: 6px;
   padding: 10px 12px;

@@ -1,18 +1,17 @@
 const KEY = "quizz_scores";
 const MAX_ENTRIES = 50;
 
-export function saveScore({ name, score, total, mode }) {
+export function saveScore({ name, score, total, points, mode }) {
   const entries = getScores();
   entries.push({
     name,
     score,
     total,
-    pct: Math.round((score / total) * 100),
+    points,
     mode,
     date: new Date().toLocaleDateString("fr-FR"),
   });
-  // Keep last MAX_ENTRIES, sorted by pct desc
-  entries.sort((a, b) => b.pct - a.pct || b.score - a.score);
+  entries.sort((a, b) => b.points - a.points || b.score - a.score);
   localStorage.setItem(KEY, JSON.stringify(entries.slice(0, MAX_ENTRIES)));
 }
 
