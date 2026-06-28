@@ -11,8 +11,8 @@ export default function ScoreBoard({ name, score, total, points, mode, onRestart
 
   useEffect(() => {
     if (!saved.current) {
-      saveScore({ name, score, total, points, mode });
       saved.current = true;
+      saveScore({ name, score, total, points, mode });
     }
   }, []);
 

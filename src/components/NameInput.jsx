@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { getScores } from "../utils/leaderboard";
 
 export default function NameInput({ onStart, onLeaderboard }) {
   const [name, setName] = useState("");
-  const hasScores = getScores().length > 0;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,15 +40,13 @@ export default function NameInput({ onStart, onLeaderboard }) {
         </button>
       </form>
 
-      {hasScores && (
-        <button
-          onClick={onLeaderboard}
-          className="btn-ghost"
-          style={{ marginTop: "14px" }}
-        >
-          Voir le classement
-        </button>
-      )}
+      <button
+        onClick={onLeaderboard}
+        className="btn-ghost"
+        style={{ marginTop: "14px" }}
+      >
+        Voir le classement
+      </button>
     </div>
   );
 }
