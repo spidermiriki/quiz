@@ -237,21 +237,18 @@
 /* ===== LEADERBOARD ===== */
 .lb-row {
   display: grid;
-  grid-template-columns: 28px 1fr 50px 80px 40px 60px;
+  grid-template-columns: 32px 1fr 24px auto;
   align-items: center;
-  gap: 6px;
-  padding: 10px 12px;
+  gap: 8px;
+  padding: 12px 14px;
   border-radius: 12px;
   background: #faf5ff;
   border: 1px solid #f3e8ff;
-  font-size: 0.85rem;
 }
-.lb-rank  { font-size: 1rem; text-align: center; }
-.lb-name  { font-weight: 700; color: #4c1d95; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.lb-mode  { font-size: 0.7rem; color: #a855f7; background: #f3e8ff; border-radius: 6px; padding: 2px 6px; text-align: center; }
-.lb-score { font-weight: 800; color: #7e22ce; text-align: right; }
-.lb-detail{ color: #c4b5fd; font-size: 0.75rem; text-align: center; }
-.lb-date  { color: #c4b5fd; font-size: 0.72rem; text-align: right; }
+.lb-rank  { font-size: 0.9rem; font-weight: 700; text-align: center; }
+.lb-name  { font-size: 1rem; font-weight: 800; color: #4c1d95; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb-mode  { font-size: 0.65rem; font-weight: 800; color: #a855f7; background: #f3e8ff; border-radius: 6px; padding: 3px 5px; text-align: center; }
+.lb-score { font-size: 1rem; font-weight: 800; color: #7e22ce; text-align: right; white-space: nowrap; }
 
 /* ===== TABLET ===== */
 @media (min-width: 600px) {
