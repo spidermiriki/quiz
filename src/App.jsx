@@ -32,7 +32,8 @@ export default function App() {
   const [mode, setMode] = useState(null);          // "qcm" | "open"
   const [deck, setDeck] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(0);       // nb de bonnes réponses
+  const [points, setPoints] = useState(0);     // total points
 
   function handleName(name) {
     setPlayerName(name);
@@ -44,16 +45,19 @@ export default function App() {
     setDeck(buildDeck());
     setCurrentIndex(0);
     setScore(0);
+    setPoints(0);
     setPhase("quiz");
   }
 
-  function handleNext(wasCorrect) {
+  function handleNext(wasCorrect, pts) {
     if (wasCorrect) setScore((s) => s + 1);
+    setPoints((p) => p + (pts ?? 0));
     setCurrentIndex((i) => i + 1);
   }
 
-  function handleFinish(wasCorrect) {
+  function handleFinish(wasCorrect, pts) {
     setScore(wasCorrect ? score + 1 : score);
+    setPoints((p) => p + (pts ?? 0));
     setPhase("score");
   }
 
@@ -62,6 +66,7 @@ export default function App() {
     setDeck([]);
     setCurrentIndex(0);
     setScore(0);
+    setPoints(0);
     setMode(null);
   }
 
@@ -99,6 +104,7 @@ export default function App() {
               name={playerName}
               score={score}
               total={deck.length}
+              points={points}
               mode={mode}
               onRestart={handleRestart}
               onLeaderboard={() => setPhase("leaderboard")}
