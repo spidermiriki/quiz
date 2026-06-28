@@ -59,6 +59,7 @@ export default function App() {
 
   function handleRestart() {
     setPhase("mode");
+    setDeck([]);
     setCurrentIndex(0);
     setScore(0);
     setMode(null);
@@ -84,9 +85,9 @@ export default function App() {
           {phase === "quiz" && (
             <QuizCard
               key={currentIndex}
-              question={questions[currentIndex]}
+              question={deck[currentIndex]}
               index={currentIndex}
-              total={questions.length}
+              total={deck.length}
               mode={mode}
               onNext={handleNext}
               onFinish={handleFinish}
@@ -97,7 +98,7 @@ export default function App() {
             <ScoreBoard
               name={playerName}
               score={score}
-              total={questions.length}
+              total={deck.length}
               mode={mode}
               onRestart={handleRestart}
               onLeaderboard={() => setPhase("leaderboard")}
