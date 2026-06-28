@@ -1,15 +1,22 @@
 import { getScores, clearScores } from "../utils/leaderboard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const MEDALS = ["or", "argent", "bronze"];
 const MEDAL_COLORS = ["#f59e0b", "#94a3b8", "#b45309"];
 
 export default function Leaderboard({ onBack }) {
-  const [scores, setScores] = useState(getScores);
+  const [scores, setScores] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  function handleClear() {
+  useEffect(() => {
+    getScores().then((s) => {
+      setScores(s);
+      setLoading(false);
+    });
+  }, []);
+
+  async function handleClear() {
     if (window.confirm("Effacer tout le classement ?")) {
-      clearScores();
+      await clearScores();
       setScores([]);
     }
   }
@@ -25,19 +32,23 @@ export default function Leaderboard({ onBack }) {
         </button>
       </div>
 
-      {scores.length === 0 ? (
+      {loading ? (
+        <p style={{ textAlign: "center", color: "#c4b5fd", padding: "32px 0" }}>
+          Chargement...
+        </p>
+      ) : scores.length === 0 ? (
         <p style={{ textAlign: "center", color: "#c4b5fd", padding: "32px 0" }}>
           Aucun score encore enregistre.
         </p>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {scores.map((s, i) => (
-            <div key={i} className="lb-row">
+            <div key={s.id} className="lb-row">
               <span
                 className="lb-rank"
                 style={{ color: i < 3 ? MEDAL_COLORS[i] : "#c4b5fd" }}
               >
-                {i < 3 ? `#${i + 1}` : `#${i + 1}`}
+                {`#${i + 1}`}
               </span>
               <span className="lb-name">{s.name}</span>
               <span className="lb-mode">{s.mode === "qcm" ? "QCM" : "Ouvert"}</span>

@@ -1,28 +1,42 @@
-const KEY = "quizz_scores";
+import { db } from "./firebase";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+  limit,
+} from "firebase/firestore";
+
+const COL = "scores";
 const MAX_ENTRIES = 50;
 
-export function saveScore({ name, score, total, points, mode }) {
-  const entries = getScores();
-  entries.push({
+export async function saveScore({ name, score, total, points, mode }) {
+  await addDoc(collection(db, COL), {
     name,
     score,
     total,
     points,
     mode,
     date: new Date().toLocaleDateString("fr-FR"),
+    createdAt: Date.now(),
   });
-  entries.sort((a, b) => b.points - a.points || b.score - a.score);
-  localStorage.setItem(KEY, JSON.stringify(entries.slice(0, MAX_ENTRIES)));
 }
 
-export function getScores() {
-  try {
-    return JSON.parse(localStorage.getItem(KEY)) ?? [];
-  } catch {
-    return [];
-  }
+export async function getScores() {
+  const q = query(
+    collection(db, COL),
+    orderBy("points", "desc"),
+    orderBy("score", "desc"),
+    limit(MAX_ENTRIES)
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
-export function clearScores() {
-  localStorage.removeItem(KEY);
+export async function clearScores() {
+  const snap = await getDocs(collection(db, COL));
+  await Promise.all(snap.docs.map((d) => deleteDoc(doc(db, COL, d.id))));
 }
