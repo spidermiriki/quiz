@@ -2,7 +2,7 @@ const config = {
   facile:    { label: "Facile",     color: "#166534", bg: "#f0fdf4", border: "#86efac" },
   moyen:     { label: "Moyen",      color: "#854d0e", bg: "#fefce8", border: "#fde047" },
   difficile: { label: "Difficile",  color: "#991b1b", bg: "#fff1f2", border: "#fca5a5" },
-  impossible:{ label: "Impossible", color: "#4c1d95", bg: "#f5f3ff", border: "#8b5cf6" },
+  impossible:{ label: "Impossible", color: "#0e7490", bg: "#ecfeff", border: "#67e8f9" },
 };
 
 export default function DifficultyBadge({ difficulty }) {

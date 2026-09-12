@@ -25,7 +25,7 @@ export default function ResultMessage({ isCorrect }) {
     >
       {isCorrect ? (
         <p style={{ color: "#166534", fontSize: "1.25rem", fontWeight: 800, margin: 0 }}>
-          Bravo ma controleuse !
+          Bravo !
         </p>
       ) : (
         <p style={{ color: "#991b1b", fontSize: "1.25rem", fontWeight: 800, margin: 0 }}>

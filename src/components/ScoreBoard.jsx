@@ -18,7 +18,7 @@ export default function ScoreBoard({ name, photo, score, total, points, mode, on
 
   function getMessage() {
     if (pct === 100) return { text: "Tu me connais parfaitement !", color: "#166534" };
-    if (pct >= 70)   return { text: "Tu me connais bien !", color: "#7e22ce" };
+    if (pct >= 70)   return { text: "Tu me connais bien !", color: "#1AA36D" };
     if (pct >= 40)   return { text: "Encore quelques efforts...", color: "#854d0e" };
     return            { text: "On va rattraper ca ensemble !", color: "#991b1b" };
   }
@@ -27,7 +27,7 @@ export default function ScoreBoard({ name, photo, score, total, points, mode, on
 
   return (
     <div className="card" style={{ textAlign: "center", padding: "36px 24px" }}>
-      <p style={{ color: "#c4b5fd", fontSize: "0.82rem", fontWeight: 600, marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+      <p style={{ color: "#6ee7b7", fontSize: "0.82rem", fontWeight: 600, marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
         Score de {name}
       </p>
 
@@ -35,11 +35,11 @@ export default function ScoreBoard({ name, photo, score, total, points, mode, on
       <p className="gradient-text" style={{ fontSize: "3.8rem", fontWeight: 900, lineHeight: 1, margin: "0 0 4px" }}>
         {points.toLocaleString("fr-FR")}
       </p>
-      <p style={{ color: "#c4b5fd", fontSize: "0.8rem", marginBottom: "6px" }}>
+      <p style={{ color: "#6ee7b7", fontSize: "0.8rem", marginBottom: "6px" }}>
         pts sur {maxPoints.toLocaleString("fr-FR")} max
       </p>
 
-      <p style={{ color: "#9333ea", fontSize: "0.9rem", marginBottom: "6px", opacity: 0.7 }}>
+      <p style={{ color: "#1AA36D", fontSize: "0.9rem", marginBottom: "6px", opacity: 0.7 }}>
         {score} bonne{score > 1 ? "s" : ""} reponse{score > 1 ? "s" : ""} sur {total} — {pct}%
       </p>
 
@@ -48,11 +48,11 @@ export default function ScoreBoard({ name, photo, score, total, points, mode, on
       </p>
 
       {/* Barre de points */}
-      <div style={{ height: "10px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "24px", overflow: "hidden" }}>
+      <div style={{ height: "10px", backgroundColor: "#d1fae5", borderRadius: "999px", marginBottom: "24px", overflow: "hidden" }}>
         <div style={{
           height: "100%",
           width: `${Math.min(100, (points / maxPoints) * 100)}%`,
-          background: "linear-gradient(90deg, #9333ea, #c084fc)",
+          background: "linear-gradient(90deg, #1AA36D, #34d399)",
           borderRadius: "999px",
           transition: "width 0.9s ease",
         }} />

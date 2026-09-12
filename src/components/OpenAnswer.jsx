@@ -55,12 +55,12 @@ export default function OpenAnswer({ question, onCorrect, onTimeout }) {
   }
 
   const pct = (timeLeft / TIMER) * 100;
-  const timerColor = timeLeft > 15 ? "#a855f7" : timeLeft > 7 ? "#f59e0b" : "#ef4444";
+  const timerColor = timeLeft > 15 ? "#1AA36D" : timeLeft > 7 ? "#f59e0b" : "#ef4444";
 
   return (
     <div>
       {/* Timer bar */}
-      <div style={{ height: "5px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "8px", overflow: "hidden" }}>
+      <div style={{ height: "5px", backgroundColor: "#d1fae5", borderRadius: "999px", marginBottom: "8px", overflow: "hidden" }}>
         <div style={{
           height: "100%",
           width: `${pct}%`,
@@ -79,7 +79,7 @@ export default function OpenAnswer({ question, onCorrect, onTimeout }) {
       {/* Historique des tentatives */}
       {attempts.length > 0 && status !== "correct" && status !== "timeout" && (
         <div style={{ marginBottom: "12px" }}>
-          <p style={{ fontSize: "0.72rem", color: "#c4b5fd", marginBottom: "6px", fontWeight: 600 }}>
+          <p style={{ fontSize: "0.72rem", color: "#6ee7b7", marginBottom: "6px", fontWeight: 600 }}>
             Tes tentatives :
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>

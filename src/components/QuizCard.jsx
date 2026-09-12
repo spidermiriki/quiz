@@ -49,31 +49,31 @@ export default function QuizCard({ question, index, total, mode, onNext, onFinis
 
   // ── QCM timer bar ──
   const qcmPct = (qcmTimeLeft / QCM_TIMER) * 100;
-  const qcmTimerColor = qcmTimeLeft > 10 ? "#a855f7" : qcmTimeLeft > 5 ? "#f59e0b" : "#ef4444";
+  const qcmTimerColor = qcmTimeLeft > 10 ? "#1AA36D" : qcmTimeLeft > 5 ? "#f59e0b" : "#ef4444";
 
   return (
     <div className="card">
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-        <span style={{ color: "#c4b5fd", fontSize: "0.82rem", fontWeight: 600 }}>
+        <span style={{ color: "#6ee7b7", fontSize: "0.82rem", fontWeight: 600 }}>
           {index + 1} / {total}
         </span>
         <DifficultyBadge difficulty={question.difficulty} />
       </div>
 
       {/* Barre progression questions */}
-      <div style={{ height: "5px", backgroundColor: "#f3e8ff", borderRadius: "999px", marginBottom: "6px", overflow: "hidden" }}>
+      <div style={{ height: "5px", backgroundColor: "#d1fae5", borderRadius: "999px", marginBottom: "6px", overflow: "hidden" }}>
         <div style={{
           height: "100%",
           width: `${((index + 1) / total) * 100}%`,
-          background: "linear-gradient(90deg, #9333ea, #c084fc)",
+          background: "linear-gradient(90deg, #1AA36D, #34d399)",
           borderRadius: "999px",
           transition: "width 0.4s ease",
         }} />
       </div>
 
       {/* Question */}
-      <p style={{ color: "#3b0764", fontSize: "1.05rem", fontWeight: 700, lineHeight: 1.55, margin: "18px 0 0" }}>
+      <p style={{ color: "#064e3b", fontSize: "1.05rem", fontWeight: 700, lineHeight: 1.55, margin: "18px 0 0" }}>
         {question.question}
       </p>
 
@@ -83,7 +83,7 @@ export default function QuizCard({ question, index, total, mode, onNext, onFinis
           {/* Timer QCM */}
           {!qcmAnswered && (
             <div style={{ marginTop: "14px" }}>
-              <div style={{ height: "4px", backgroundColor: "#f3e8ff", borderRadius: "999px", overflow: "hidden" }}>
+              <div style={{ height: "4px", backgroundColor: "#d1fae5", borderRadius: "999px", overflow: "hidden" }}>
                 <div style={{
                   height: "100%",
                   width: `${qcmPct}%`,
@@ -111,7 +111,7 @@ export default function QuizCard({ question, index, total, mode, onNext, onFinis
             <>
               <ResultMessage isCorrect={qcmCorrect} />
               {qcmCorrect && (
-                <p style={{ textAlign: "center", color: "#7e22ce", fontSize: "0.85rem", fontWeight: 700, marginBottom: "8px" }}>
+                <p style={{ textAlign: "center", color: "#166534", fontSize: "0.85rem", fontWeight: 700, marginBottom: "8px" }}>
                   +{selected?.pts} pts
                 </p>
               )}

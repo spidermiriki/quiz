@@ -1,7 +1,7 @@
 export default function ModeSelector({ name, onSelect }) {
   return (
     <div className="card" style={{ textAlign: "center", padding: "36px 24px" }}>
-      <p style={{ color: "#c4b5fd", fontSize: "0.85rem", fontWeight: 600, marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+      <p style={{ color: "#6ee7b7", fontSize: "0.85rem", fontWeight: 600, marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
         Bonjour {name}
       </p>
       <h2

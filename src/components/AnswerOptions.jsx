@@ -18,9 +18,9 @@ export default function AnswerOptions({ options, selected, answer, onSelect }) {
     if (!answered) {
       return {
         ...base,
-        backgroundColor: "#faf5ff",
-        borderColor: "#e9d5ff",
-        color: "#4c1d95",
+        backgroundColor: "#f0fdf4",
+        borderColor: "#a7f3d0",
+        color: "#064e3b",
       };
     }
 
@@ -42,9 +42,9 @@ export default function AnswerOptions({ options, selected, answer, onSelect }) {
     }
     return {
       ...base,
-      backgroundColor: "#fdf8ff",
-      borderColor: "#f3e8ff",
-      color: "#c4b5fd",
+      backgroundColor: "#f0fdf4",
+      borderColor: "#d1fae5",
+      color: "#6ee7b7",
     };
   }
 

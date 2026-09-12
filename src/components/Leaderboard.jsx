@@ -16,9 +16,9 @@ function Avatar({ photo, name }) {
   return (
     <div style={{
       width: 32, height: 32, borderRadius: "50%", flexShrink: 0,
-      background: "linear-gradient(135deg, #e9d5ff, #c084fc)",
+      background: "linear-gradient(135deg, #d1fae5, #34d399)",
       display: "flex", alignItems: "center", justifyContent: "center",
-      fontWeight: 800, fontSize: "0.85rem", color: "#7e22ce",
+      fontWeight: 800, fontSize: "0.85rem", color: "#166534",
     }}>
       {name[0].toUpperCase()}
     </div>
@@ -48,18 +48,18 @@ export default function Leaderboard({ onBack }) {
       </div>
 
       {loading ? (
-        <p style={{ textAlign: "center", color: "#c4b5fd", padding: "32px 0" }}>
+        <p style={{ textAlign: "center", color: "#6ee7b7", padding: "32px 0" }}>
           Chargement...
         </p>
       ) : scores.length === 0 ? (
-        <p style={{ textAlign: "center", color: "#c4b5fd", padding: "32px 0" }}>
+        <p style={{ textAlign: "center", color: "#6ee7b7", padding: "32px 0" }}>
           Aucun score encore enregistre.
         </p>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {scores.map((s, i) => (
             <div key={s.id} className="lb-row">
-              <span className="lb-rank" style={{ color: i < 3 ? MEDAL_COLORS[i] : "#c4b5fd" }}>
+              <span className="lb-rank" style={{ color: i < 3 ? MEDAL_COLORS[i] : "#6ee7b7" }}>
                 #{i + 1}
               </span>
               <Avatar photo={s.photo} name={s.name} />

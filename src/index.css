@@ -14,10 +14,10 @@
 }
 
 body {
-  background: linear-gradient(160deg, #f5eeff 0%, #ede0ff 100%);
+  background: linear-gradient(160deg, #e8f8f0 0%, #d1fae5 100%);
   background-attachment: fixed;
   min-height: 100dvh;
-  color: #4c1d95;
+  color: #064e3b;
 }
 
 #root {
