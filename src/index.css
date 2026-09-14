@@ -1,0 +1,30 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: linear-gradient(160deg, #f5eeff 0%, #ede0ff 100%);
+  background-attachment: fixed;
+  min-height: 100dvh;
+  color: #4c1d95;
+}
+
+#root {
+  min-height: 100dvh;
+  position: relative;
+}
+
+button {
+  font-family: var(--sans);
+}

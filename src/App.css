@@ -1,0 +1,73 @@
+/* ===== LAYOUT MOBILE FIRST ===== */
+.app-wrapper {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px 16px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ===== PANNEAU CARTE ===== */
+.card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px 22px;
+  box-shadow:
+    0 2px 8px rgba(167, 139, 250, 0.12),
+    0 8px 32px rgba(147, 51, 234, 0.1);
+  border: 1px solid #e9d5ff;
+  width: 100%;
+}
+
+/* ===== TYPOGRAPHIE ===== */
+.gradient-text {
+  background: linear-gradient(135deg, #9333ea, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== BOUTON PRINCIPAL ===== */
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #9333ea, #c084fc);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 18px rgba(147, 51, 234, 0.3);
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-primary:active {
+  opacity: 0.88;
+  transform: scale(0.98);
+}
+
+/* ===== PAGE ACCUEIL ===== */
+.home-subtitle {
+  color: #9333ea;
+  opacity: 0.7;
+  margin-bottom: 28px;
+  font-size: 0.95rem;
+}
+
+/* ===== TABLET / DESKTOP ===== */
+@media (min-width: 600px) {
+  .app-wrapper {
+    align-items: center;
+    padding: 48px 24px;
+  }
+}
